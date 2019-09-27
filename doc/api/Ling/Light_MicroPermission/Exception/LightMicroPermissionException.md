@@ -4,7 +4,7 @@
 
 The LightMicroPermissionException class
 ================
-2019-09-26 --> 2019-09-26
+2019-09-26 --> 2019-09-27
 
 
 
@@ -54,4 +54,4 @@ See the source code of [Ling\Light_MicroPermission\Exception\LightMicroPermissio
 
 SeeAlso
 ==============
-Next class: [LightMicroPermissionResolverInterface](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface.md)<br>
+Next class: [BabyYamlMicroPermissionResolver](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/BabyYamlMicroPermissionResolver.md)<br>

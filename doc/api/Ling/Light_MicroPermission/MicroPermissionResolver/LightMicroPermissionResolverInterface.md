@@ -4,7 +4,7 @@
 
 The LightMicroPermissionResolverInterface class
 ================
-2019-09-26 --> 2019-09-26
+2019-09-26 --> 2019-09-27
 
 
 
@@ -25,7 +25,7 @@ Class synopsis
 abstract class <span class="pl-k">LightMicroPermissionResolverInterface</span>  {
 
 - Methods
-    - abstract public [resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface/resolve.md)(string $microPermissionId) : string | false
+    - abstract public [resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface/resolve.md)(string $microPermission) : string | false
 
 }
 
@@ -37,7 +37,7 @@ abstract class <span class="pl-k">LightMicroPermissionResolverInterface</span>  
 Methods
 ==============
 
-- [LightMicroPermissionResolverInterface::resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface/resolve.md) &ndash; Returns the permission corresponding to the given micro-permission identifier.
+- [LightMicroPermissionResolverInterface::resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface/resolve.md) &ndash; Returns the permission corresponding to the given micro-permission.
 
 
 
@@ -52,4 +52,4 @@ See the source code of [Ling\Light_MicroPermission\MicroPermissionResolver\Light
 
 SeeAlso
 ==============
-Previous class: [LightMicroPermissionException](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Exception/LightMicroPermissionException.md)<br>Next class: [LightMicroPermissionService](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService.md)<br>
+Previous class: [BabyYamlMicroPermissionResolver](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/BabyYamlMicroPermissionResolver.md)<br>Next class: [LightMicroPermissionService](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService.md)<br>

@@ -63,11 +63,11 @@ class LightMicroPermissionService
     /**
      * Returns whether the current user has the given micro-permission.
      *
-     * @param string $permission
+     * @param string $microPermission
      * @return bool
      * @throws \Exception
      */
-    public function hasMicroPermission(string $permission): bool
+    public function hasMicroPermission(string $microPermission): bool
     {
         /**
          * @var $user LightUserInterface
@@ -77,11 +77,11 @@ class LightMicroPermissionService
             return true;
         }
 
-        $p = explode(".", $permission, 2);
+        $p = explode(".", $microPermission, 2);
         if (2 === count($p)) {
             list($pluginName, $microPermissionId) = $p;
             if (array_key_exists($pluginName, $this->microPermissionResolvers)) {
-                $permission = $this->microPermissionResolvers[$pluginName]->resolve($microPermissionId);
+                $permission = $this->microPermissionResolvers[$pluginName]->resolve($microPermission);
                 if (false !== $permission) {
                     return $user->hasRight($permission);
                 }
@@ -92,7 +92,7 @@ class LightMicroPermissionService
                  */
             }
         } else {
-            throw new LightMicroPermissionException("Invalid permission notation: $permission. Two dot separated members were expected.");
+            throw new LightMicroPermissionException("Invalid permission notation: $microPermission. Two dot separated members were expected.");
         }
 
 

@@ -60,6 +60,11 @@ micro_permission:
 History Log
 =============
 
+- 1.1.0 -- 2019-09-27
+
+    - add BabyYamlMicroPermissionResolver
+    - fix LightMicroPermissionResolverInterface using microPermissionId instead of microPermission
+    
 - 1.0.0 -- 2019-09-26
 
     - initial commit

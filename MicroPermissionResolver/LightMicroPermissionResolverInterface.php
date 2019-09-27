@@ -10,11 +10,11 @@ interface LightMicroPermissionResolverInterface
 {
 
     /**
-     * Returns the permission corresponding to the given micro-permission identifier.
+     * Returns the permission corresponding to the given micro-permission.
      * Or false if the micro-permission has no permission assigned yet.
      *
-     * @param string $microPermissionId
+     * @param string $microPermission
      * @return string|false
      */
-    public function resolve(string $microPermissionId);
+    public function resolve(string $microPermission);
 }

@@ -16,7 +16,7 @@ Description
 ================
 
 
-public [LightMicroPermissionService::hasMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/hasMicroPermission.md)(string $permission) : bool
+public [LightMicroPermissionService::hasMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/hasMicroPermission.md)(string $microPermission) : bool
 
 
 
@@ -30,7 +30,7 @@ Parameters
 ================
 
 
-- permission
+- microPermission
 
     
 

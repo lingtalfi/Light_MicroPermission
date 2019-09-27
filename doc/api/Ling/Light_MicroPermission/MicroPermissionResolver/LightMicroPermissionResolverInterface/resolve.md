@@ -7,7 +7,7 @@ LightMicroPermissionResolverInterface::resolve
 
 
 
-LightMicroPermissionResolverInterface::resolve — Returns the permission corresponding to the given micro-permission identifier.
+LightMicroPermissionResolverInterface::resolve — Returns the permission corresponding to the given micro-permission.
 
 
 
@@ -16,12 +16,12 @@ Description
 ================
 
 
-abstract public [LightMicroPermissionResolverInterface::resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface/resolve.md)(string $microPermissionId) : string | false
+abstract public [LightMicroPermissionResolverInterface::resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/MicroPermissionResolver/LightMicroPermissionResolverInterface/resolve.md)(string $microPermission) : string | false
 
 
 
 
-Returns the permission corresponding to the given micro-permission identifier.
+Returns the permission corresponding to the given micro-permission.
 Or false if the micro-permission has no permission assigned yet.
 
 
@@ -31,7 +31,7 @@ Parameters
 ================
 
 
-- microPermissionId
+- microPermission
 
     
 
