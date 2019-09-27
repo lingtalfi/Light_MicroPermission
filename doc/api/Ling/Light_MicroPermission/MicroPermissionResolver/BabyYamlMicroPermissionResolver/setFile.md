@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [BabyYamlMicroPermissionResolver::setFile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/MicroPermissionResolver/BabyYamlMicroPermissionResolver.php#L57-L60)
+See the source code for method [BabyYamlMicroPermissionResolver::setFile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/MicroPermissionResolver/BabyYamlMicroPermissionResolver.php#L56-L59)
 
 
 See Also

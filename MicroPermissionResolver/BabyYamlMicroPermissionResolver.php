@@ -42,7 +42,6 @@ class BabyYamlMicroPermissionResolver implements LightMicroPermissionResolverInt
         if (null === $this->conf) {
             $this->conf = BabyYamlUtil::readFile($this->file);
         }
-        a("here", $microPermission);
         if (array_key_exists($microPermission, $this->conf['micro_permissions'])) {
             return $this->conf['micro_permissions'][$microPermission];
         }

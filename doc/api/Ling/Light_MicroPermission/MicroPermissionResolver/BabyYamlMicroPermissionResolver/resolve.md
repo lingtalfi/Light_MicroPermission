@@ -50,7 +50,7 @@ Returns string | false.
 
 Source Code
 ===========
-See the source code for method [BabyYamlMicroPermissionResolver::resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/MicroPermissionResolver/BabyYamlMicroPermissionResolver.php#L40-L50)
+See the source code for method [BabyYamlMicroPermissionResolver::resolve](https://github.com/lingtalfi/Light_MicroPermission/blob/master/MicroPermissionResolver/BabyYamlMicroPermissionResolver.php#L40-L49)
 
 
 See Also
