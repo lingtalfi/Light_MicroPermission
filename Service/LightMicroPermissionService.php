@@ -4,10 +4,10 @@
 namespace Ling\Light_MicroPermission\Service;
 
 
+use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
-use Ling\Light_MicroPermission\Exception\LightMicroPermissionException;
-use Ling\Light_MicroPermission\MicroPermissionResolver\LightMicroPermissionResolverInterface;
 use Ling\Light_User\LightUserInterface;
+use Ling\Light_UserManager\Service\LightUserManagerService;
 
 /**
  * The LightMicroPermissionService class.
@@ -22,11 +22,12 @@ class LightMicroPermissionService
     protected $container;
 
     /**
-     * This property holds the microPermissionResolvers for this instance.
-     * It's an array of plugin name => LightMicroPermissionResolverInterface.
-     * @var LightMicroPermissionResolverInterface[]
+     * This property holds the microPermissionsMap for this instance.
+     * It's an array of micro-permission => (array of) permissions.
+     *
+     * @var array
      */
-    protected $microPermissionResolvers;
+    protected $microPermissionsMap;
 
 
     /**
@@ -35,7 +36,7 @@ class LightMicroPermissionService
     public function __construct()
     {
         $this->container = null;
-        $this->microPermissionResolvers = [];
+        $this->microPermissionsMap = [];
     }
 
     /**
@@ -48,15 +49,16 @@ class LightMicroPermissionService
         $this->container = $container;
     }
 
+
     /**
-     * Registers a micro permission resolver for a given plugin.
+     * Register the micro-permission bindings defined in the given file.
+     * See more details in the @page(micro-permission conception notes).
      *
-     * @param string $pluginName
-     * @param LightMicroPermissionResolverInterface $resolver
+     * @param string $file
      */
-    public function registerMicroPermissionResolver(string $pluginName, LightMicroPermissionResolverInterface $resolver)
+    public function registerMicroPermissionsByFile(string $file)
     {
-        $this->microPermissionResolvers[$pluginName] = $resolver;
+        $this->microPermissionsMap = array_merge_recursive($this->microPermissionsMap, BabyYamlUtil::readFile($file));
     }
 
 
@@ -69,33 +71,30 @@ class LightMicroPermissionService
      */
     public function hasMicroPermission(string $microPermission): bool
     {
+
+        /**
+         * @var $userManager LightUserManagerService
+         */
+        $userManager = $this->container->get("user_manager");
         /**
          * @var $user LightUserInterface
          */
-        $user = $this->container->get("user_manager")->getUser();
+        $user = $userManager->getUser();
         if (true === $user->hasRight("*")) {
             return true;
         }
 
-        $p = explode(".", $microPermission, 2);
-        if (2 === count($p)) {
-            list($pluginName, $microPermissionId) = $p;
-            if (array_key_exists($pluginName, $this->microPermissionResolvers)) {
-                $permission = $this->microPermissionResolvers[$pluginName]->resolve($microPermission);
-                if (false !== $permission) {
-                    return $user->hasRight($permission);
-                }
-            } else {
-                /**
-                 * In this case we return false, this allows developer to use micro-permission in their code that aren't
-                 * yet created (optimistic pattern).
-                 */
+        if (array_key_exists($microPermission, $this->microPermissionsMap)) {
+            $permissions = $this->microPermissionsMap[$microPermission];
+            if (false === is_array($permissions)) {
+                $permissions = [$permissions];
             }
-        } else {
-            throw new LightMicroPermissionException("Invalid permission notation: $microPermission. Two dot separated members were expected.");
+            foreach ($permissions as $permission) {
+                if (true === $user->hasRight($permission)) {
+                    return true;
+                }
+            }
         }
-
-
         return false;
     }
 }

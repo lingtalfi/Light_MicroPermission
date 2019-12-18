@@ -1,6 +1,6 @@
 Light_MicroPermission
 ===========
-2019-09-26
+2019-09-26 -> 2019-12-18
 
 
 
@@ -61,6 +61,10 @@ micro_permission:
 History Log
 =============
 
+- 2.0.0 -- 2019-12-18
+
+    - new system
+    
 - 1.1.2 -- 2019-10-30
 
     - add "Recommended micro permission notation" document
