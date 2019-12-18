@@ -61,6 +61,10 @@ micro_permission:
 History Log
 =============
 
+- 2.0.1 -- 2019-12-18
+
+    - forgot implementation of mode
+    
 - 2.0.0 -- 2019-12-18
 
     - new system

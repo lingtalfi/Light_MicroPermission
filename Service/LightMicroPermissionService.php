@@ -29,6 +29,12 @@ class LightMicroPermissionService
      */
     protected $microPermissionsMap;
 
+    /**
+     * This property holds the mode for this instance.
+     * @var string = user
+     */
+    protected $mode;
+
 
     /**
      * Builds the LightMicroPermissionService instance.
@@ -37,6 +43,7 @@ class LightMicroPermissionService
     {
         $this->container = null;
         $this->microPermissionsMap = [];
+        $this->mode = 'user';
     }
 
     /**
@@ -47,6 +54,16 @@ class LightMicroPermissionService
     public function setContainer(LightServiceContainerInterface $container)
     {
         $this->container = $container;
+    }
+
+    /**
+     * Sets the mode.
+     *
+     * @param string $mode
+     */
+    public function setMode(string $mode)
+    {
+        $this->mode = $mode;
     }
 
 
@@ -71,6 +88,9 @@ class LightMicroPermissionService
      */
     public function hasMicroPermission(string $microPermission): bool
     {
+        if ('system' === $this->mode) {
+            return true;
+        }
 
         /**
          * @var $userManager LightUserManagerService
