@@ -61,6 +61,10 @@ micro_permission:
 History Log
 =============
 
+- 2.1.0 -- 2019-12-19
+
+    - replace mode system with disabledNamespace system
+    
 - 2.0.1 -- 2019-12-18
 
     - forgot implementation of mode

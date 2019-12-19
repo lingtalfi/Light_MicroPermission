@@ -30,10 +30,10 @@ class LightMicroPermissionService
     protected $microPermissionsMap;
 
     /**
-     * This property holds the mode for this instance.
-     * @var string = user
+     * This property holds the disabledNamespaces for this instance.
+     * @var array
      */
-    protected $mode;
+    protected $disabledNamespaces;
 
 
     /**
@@ -43,7 +43,7 @@ class LightMicroPermissionService
     {
         $this->container = null;
         $this->microPermissionsMap = [];
-        $this->mode = 'user';
+        $this->disabledNamespaces = [];
     }
 
     /**
@@ -56,14 +56,26 @@ class LightMicroPermissionService
         $this->container = $container;
     }
 
+
     /**
-     * Sets the mode.
+     * Disable the micro-permission system for the given namespace, so that the
+     * hasMicroPermission method will always return true for all micro-permissions of that namespace.
      *
-     * @param string $mode
+     * @param string $namespace
      */
-    public function setMode(string $mode)
+    public function disableNamespace(string $namespace)
     {
-        $this->mode = $mode;
+        if (false === in_array($namespace, $this->disabledNamespaces, true)) {
+            $this->disabledNamespaces[] = $namespace;
+        }
+    }
+
+    /**
+     * Restores all the disabled namespaces.
+     */
+    public function restoreNamespaces()
+    {
+        $this->disabledNamespaces = [];
     }
 
 
@@ -88,8 +100,12 @@ class LightMicroPermissionService
      */
     public function hasMicroPermission(string $microPermission): bool
     {
-        if ('system' === $this->mode) {
-            return true;
+        if ($this->disabledNamespaces) {
+            $p = explode(".", $microPermission);
+            $namespace = array_shift($p);
+            if (in_array($namespace, $this->disabledNamespaces, true)) {
+                return true;
+            }
         }
 
         /**

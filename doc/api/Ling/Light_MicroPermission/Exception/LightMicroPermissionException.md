@@ -4,7 +4,7 @@
 
 The LightMicroPermissionException class
 ================
-2019-09-26 --> 2019-12-18
+2019-09-26 --> 2019-12-19
 
 
 

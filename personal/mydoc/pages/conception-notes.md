@@ -55,25 +55,27 @@ There is a micro-permission handler (that we provide), which basically holds tha
 - hasMicroPermission ( string microPermission ): bool
 
 
-To understand how this method work, we need to understand the two different modes the micro-permission handler can work in.
 
 
-The modes
+
+
+Namespaces
 ---------------
 
-The micro-permission handler works in a given mode, and the mode can be changed by the developer.
+By convention, a micro-permission name is a dot separated string, where the first component is called the namespace.
 
-So far, the modes are:
-
-- user (this is the default mode)
-- system
+That's because as we said, the micro-permission system is used for when we have a lot of permissions to deal with, and
+so more often than not we can group those in namespaces.
 
 
-Here is how it works inside the hasMicroPermission method:
+We can disable namespaces temporarily, which can be useful sometimes.
+For instance, we have this [recommended micro-permission notation for database interaction](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/pages/recommended-micropermission-notation.md#database-interaction), 
+which has the "tables" namespace, and during a plugin A installation phase (assuming plugin A installs tables in the database),
+we can temporarily disable the "tables" namespace to allow the plugin A to install itself.
 
-- in "user" mode, the handler will use the map built by the plugins to define whether the given micro-permission is granted to the user. 
-        If the current user owns at least one of the permission bound to the micro-permission, the method returns true, otherwise it returns false.
-- in "system" mode, the handler will always return true (i.e. the map is bypassed). The system mode is useful for when plugins need to install their database for instance.
+
+In other words, the micro-permission system is aimed towards the current user, but we can disable it temporarily 
+when the executing actions on the behalf of the developer or plugin author.  
 
 
 
