@@ -71,11 +71,27 @@ class LightMicroPermissionService
     }
 
     /**
-     * Restores all the disabled namespaces.
+     * Restores all the disabled namespaces by default, or only the ones specified in the arguments.
+     * The namespace argument can be either a string or an array.
+     *
+     * @param null|array|string $namespace
      */
-    public function restoreNamespaces()
+    public function restoreNamespaces($namespace = null)
     {
-        $this->disabledNamespaces = [];
+        if (null === $namespace) {
+            $this->disabledNamespaces = [];
+            return;
+        }
+        if (false === is_array($namespace)) {
+            $namespace = [$namespace];
+            foreach ($namespace as $ns) {
+                $index = array_search($ns, $this->disabledNamespaces);
+                if (false !== $index) {
+                    unset($this->disabledNamespaces[$index]);
+                }
+            }
+        }
+
     }
 
 

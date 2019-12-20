@@ -1,6 +1,6 @@
 Light_MicroPermission
 ===========
-2019-09-26 -> 2019-12-18
+2019-09-26 -> 2019-12-20
 
 
 
@@ -60,6 +60,10 @@ micro_permission:
 
 History Log
 =============
+
+- 2.2.0 -- 2019-12-20
+
+    - update LightMicroPermissionService->restoreNamespaces add namespace optional argument
 
 - 2.1.0 -- 2019-12-19
 

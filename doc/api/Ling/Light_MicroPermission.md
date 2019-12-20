@@ -1,6 +1,6 @@
 Ling/Light_MicroPermission
 ================
-2019-09-26 --> 2019-12-19
+2019-09-26 --> 2019-12-20
 
 
 
@@ -13,7 +13,7 @@ Table of contents
     - [LightMicroPermissionService::__construct](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/__construct.md) &ndash; Builds the LightMicroPermissionService instance.
     - [LightMicroPermissionService::setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/setContainer.md) &ndash; Sets the container.
     - [LightMicroPermissionService::disableNamespace](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/disableNamespace.md) &ndash; hasMicroPermission method will always return true for all micro-permissions of that namespace.
-    - [LightMicroPermissionService::restoreNamespaces](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/restoreNamespaces.md) &ndash; Restores all the disabled namespaces.
+    - [LightMicroPermissionService::restoreNamespaces](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/restoreNamespaces.md) &ndash; Restores all the disabled namespaces by default, or only the ones specified in the arguments.
     - [LightMicroPermissionService::registerMicroPermissionsByFile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/registerMicroPermissionsByFile.md) &ndash; Register the micro-permission bindings defined in the given file.
     - [LightMicroPermissionService::hasMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/hasMicroPermission.md) &ndash; Returns whether the current user has the given micro-permission.
 
