@@ -89,4 +89,4 @@ See the source code of [Ling\Light_MicroPermission\Service\LightMicroPermissionS
 
 SeeAlso
 ==============
-Previous class: [LightMicroPermissionException](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Exception/LightMicroPermissionException.md)<br>
+Previous class: [LightMicroPermissionException](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Exception/LightMicroPermissionException.md)<br>Next class: [LightMicroPermissionTrait](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Traits/LightMicroPermissionTrait.md)<br>

@@ -61,6 +61,10 @@ micro_permission:
 History Log
 =============
 
+- 2.3.0 -- 2019-12-20
+
+    - add LightMicroPermissionTrait trait
+    
 - 2.2.0 -- 2019-12-20
 
     - update LightMicroPermissionService->restoreNamespaces add namespace optional argument
