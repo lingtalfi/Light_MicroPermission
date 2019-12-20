@@ -61,6 +61,10 @@ micro_permission:
 History Log
 =============
 
+- 2.3.1 -- 2019-12-20
+
+    - add personal memo in conception notes
+    
 - 2.3.0 -- 2019-12-20
 
     - add LightMicroPermissionTrait trait

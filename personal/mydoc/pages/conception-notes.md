@@ -151,6 +151,45 @@ By the way, this is also the same method that's used by plugins to register thei
 So all that long discussion was just about how important the role of the human administrator can be in some cases.  
 
 
+Personal memo for plugin implementation
+----------------
+2019-12-20 
+
+I believe the best approach for implementing micro-permission in a web app is to 
+have no automatic micro-permission checked by default, and check only those who require user interaction.
+
+I say in regard to micro-permission system at the Light_Database level, which basically has the potential
+to cover every sql request. At first I thought was the ultimate idea, because it would involve less typing.
+
+But then I soon realized that I had to disable it for sql requests that are executed on the behalf of the system (i.e. not the user).
+
+(I didn't like the feeling of that disabling action, it felt like creating a system to disabling it afterwards, felt
+very awkward and conceptually wrong.)
+
+
+This led me to the question: are there more user requests or more system requests?
+Which I couldn't answer. 
+
+As a result, I know understand that there are those two types of requests, and to that to use the micro-permission system
+correctly requires asking and answering this question on every request.
+
+In that context, it seems less burden to just have no micro-permission automatically checked for you, and only when a "user" type request
+is executed, then only guard it with a micro-permission checking.
+
+That being said, I'm not sure that this approach will be the most pragmatic in all use-cases. 
+
+But that's where I'm at at this moment. The future might shape this system implementation further, and I shall keep track of 
+the implementation change in this very paragraph.
+
+See me later.
+
+
+
+
+
+
+
+
  
 
 
