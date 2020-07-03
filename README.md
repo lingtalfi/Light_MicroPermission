@@ -1,6 +1,6 @@
 Light_MicroPermission
 ===========
-2019-09-26 -> 2020-03-10
+2019-09-26 -> 2020-07-03
 
 
 
@@ -75,6 +75,10 @@ Related
 History Log
 =============
 
+- 2.6.0 -- 2020-07-03
+
+    - add LightMicroPermissionService->registerMicroPermissionsByProfile
+    
 - 2.5.0 -- 2020-03-10
 
     - removed LightMicroPermissionDatabaseEventHandler class
