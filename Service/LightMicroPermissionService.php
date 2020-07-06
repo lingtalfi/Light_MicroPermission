@@ -118,13 +118,15 @@ class LightMicroPermissionService
     public function registerMicroPermissionsByProfile(string $file)
     {
         $profile = BabyYamlUtil::readFile($file);
-        foreach ($profile as $permission => $mp) {
-            if (false === array_key_exists($mp, $this->microPermissionsMap)) {
-                $this->microPermissionsMap[$mp] = [];
-            } elseif (false === is_array($this->microPermissionsMap[$mp])) {
-                $this->microPermissionsMap[$mp] = [$this->microPermissionsMap[$mp]];
+        foreach ($profile as $permission => $microPerms) {
+            foreach ($microPerms as $mp) {
+                if (false === array_key_exists($mp, $this->microPermissionsMap)) {
+                    $this->microPermissionsMap[$mp] = [];
+                } elseif (false === is_array($this->microPermissionsMap[$mp])) {
+                    $this->microPermissionsMap[$mp] = [$this->microPermissionsMap[$mp]];
+                }
+                $this->microPermissionsMap[$mp][] = $permission;
             }
-            $this->microPermissionsMap[$mp][] = $profile;
         }
     }
 
