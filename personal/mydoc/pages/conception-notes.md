@@ -152,30 +152,15 @@ and now I add it back again in version 3, as I believe it makes the job easier t
  
 
 
+Micro-permission profiles
+-----------------
+2020-08-21
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+A **micro-permission profile** is a set of **micro-permissions**, carefully chosen. A **micro-permission profile**
+is generally assigned to a [permission](https://github.com/lingtalfi/Light_User/blob/master/doc/pages/permission-conception-notes.md). 
 
  
-
-
-
-
-
-
-
 
 
 

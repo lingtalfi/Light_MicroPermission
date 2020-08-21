@@ -70,6 +70,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.2 -- 2020-08-21
+
+    - update conception notes, add micro-permissions profile concept
+    
 - 3.0.1 -- 2020-08-21
 
     - new api, new recommendations
