@@ -70,9 +70,9 @@ micro_permission:
 History Log
 =============
 
-- 3.0.0 -- 2020-08-21
+- 3.0.1 -- 2020-08-21
 
-    - fix LightMicroPermissionService->registerMicroPermissionsByProfile not working properly
+    - new api, new recommendations
     
 - 2.6.1 -- 2020-07-06
 
