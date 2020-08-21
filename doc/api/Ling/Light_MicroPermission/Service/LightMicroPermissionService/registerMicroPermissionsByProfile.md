@@ -50,7 +50,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightMicroPermissionService::registerMicroPermissionsByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/Service/LightMicroPermissionService.php#L118-L131)
+See the source code for method [LightMicroPermissionService::registerMicroPermissionsByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/Service/LightMicroPermissionService.php#L72-L85)
 
 
 See Also

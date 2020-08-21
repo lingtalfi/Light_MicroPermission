@@ -29,12 +29,6 @@ class LightMicroPermissionService
      */
     protected $microPermissionsMap;
 
-    /**
-     * This property holds the disabledNamespaces for this instance.
-     * @var array
-     */
-    protected $disabledNamespaces;
-
 
     /**
      * Builds the LightMicroPermissionService instance.
@@ -43,7 +37,6 @@ class LightMicroPermissionService
     {
         $this->container = null;
         $this->microPermissionsMap = [];
-        $this->disabledNamespaces = [];
     }
 
     /**
@@ -54,45 +47,6 @@ class LightMicroPermissionService
     public function setContainer(LightServiceContainerInterface $container)
     {
         $this->container = $container;
-    }
-
-
-    /**
-     * Disable the micro-permission system for the given namespace, so that the
-     * hasMicroPermission method will always return true for all micro-permissions of that namespace.
-     * This is mainly use for test purposes.
-     *
-     * @param string $namespace
-     */
-    public function disableNamespace(string $namespace)
-    {
-        if (false === in_array($namespace, $this->disabledNamespaces, true)) {
-            $this->disabledNamespaces[] = $namespace;
-        }
-    }
-
-    /**
-     * Restores all the disabled namespaces by default, or only the ones specified in the arguments.
-     * The namespace argument can be either a string or an array.
-     *
-     * @param null|array|string $namespace
-     */
-    public function restoreNamespaces($namespace = null)
-    {
-        if (null === $namespace) {
-            $this->disabledNamespaces = [];
-            return;
-        }
-        if (false === is_array($namespace)) {
-            $namespace = [$namespace];
-            foreach ($namespace as $ns) {
-                $index = array_search($ns, $this->disabledNamespaces);
-                if (false !== $index) {
-                    unset($this->disabledNamespaces[$index]);
-                }
-            }
-        }
-
     }
 
 
@@ -140,13 +94,6 @@ class LightMicroPermissionService
      */
     public function hasMicroPermission(string $microPermission): bool
     {
-        if ($this->disabledNamespaces) {
-            $p = explode(".", $microPermission);
-            $namespace = array_shift($p);
-            if (in_array($namespace, $this->disabledNamespaces, true)) {
-                return true;
-            }
-        }
 
         /**
          * @var $userManager LightUserManagerService
@@ -160,15 +107,44 @@ class LightMicroPermissionService
             return true;
         }
 
+
+        $permissions = [];
         if (array_key_exists($microPermission, $this->microPermissionsMap)) {
             $permissions = $this->microPermissionsMap[$microPermission];
-            if (false === is_array($permissions)) {
-                $permissions = [$permissions];
-            }
-            foreach ($permissions as $permission) {
-                if (true === $user->hasRight($permission)) {
-                    return true;
+        } else {
+            $p = explode(".", $microPermission);
+            $perm = '';
+            $c = false;
+            while (true) {
+                if (true === $c) {
+                    $perm .= '.';
                 }
+                $perm .= array_shift($p);
+                if (array_key_exists($perm, $this->microPermissionsMap)) {
+                    $permissions = $this->microPermissionsMap[$perm];
+                    break;
+                }
+
+
+                if (empty($p)) {
+                    break;
+                }
+                $c = true;
+            }
+        }
+
+
+        if (empty($permissions)) {
+            return false;
+        }
+
+
+        if (false === is_array($permissions)) {
+            $permissions = [$permissions];
+        }
+        foreach ($permissions as $permission) {
+            if (true === $user->hasRight($permission)) {
+                return true;
             }
         }
         return false;
