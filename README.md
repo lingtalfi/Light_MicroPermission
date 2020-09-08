@@ -1,6 +1,6 @@
 Light_MicroPermission
 ===========
-2019-09-26 -> 2020-08-21
+2019-09-26 -> 2020-09-08
 
 
 
@@ -70,6 +70,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.3 -- 2020-09-08
+
+    - update recommended permissions document
+    
 - 3.0.2 -- 2020-08-21
 
     - update conception notes, add micro-permissions profile concept

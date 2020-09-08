@@ -1,6 +1,6 @@
 Recommended micro permission notation
 ===============
-2019-10-30 -> 2020-08-21
+2019-10-30 -> 2020-09-08
 
 
 
@@ -16,19 +16,19 @@ See [storage interaction](#storage-interaction).
 
 Storage interaction
 ---------------
-2020-08-21
+2020-08-21 -> 2020-09-08
 
 
 
 We recommend the following notation:
 
 
-- microPermission: store.{table}.{crudType}
+- microPermission: store.{storeId}.{crudType}
 
 
 With:
 
-- store: the name of the table
+- storeId: the identifier of the store. Typically if you store your data in a database, this is the name of the table
 - crudType: the type of the crud interaction amongst:
     - create
     - read
