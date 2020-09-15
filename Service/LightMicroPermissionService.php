@@ -6,6 +6,7 @@ namespace Ling\Light_MicroPermission\Service;
 
 use Ling\BabyYaml\BabyYamlUtil;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
+use Ling\Light_MicroPermission\Exception\LightMicroPermissionException;
 use Ling\Light_User\LightUserInterface;
 use Ling\Light_UserManager\Service\LightUserManagerService;
 
@@ -81,6 +82,18 @@ class LightMicroPermissionService
                 }
                 $this->microPermissionsMap[$mp][] = $permission;
             }
+        }
+    }
+
+
+    /**
+     * Checks that the user has the given micro-permission, and throws an exception if that's not the case.
+     * @param string $microPermission
+     */
+    public function checkMicroPermission(string $microPermission)
+    {
+        if (false === $this->hasMicroPermission($microPermission)) {
+            throw new LightMicroPermissionException("Permission denied: the user doesn't have the micro-permission: \"$microPermission\".");
         }
     }
 

@@ -1,6 +1,6 @@
 Light_MicroPermission
 ===========
-2019-09-26 -> 2020-09-08
+2019-09-26 -> 2020-09-15
 
 
 
@@ -70,6 +70,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.4 -- 2020-09-15
+
+    - add service.checkMicroPermission method
+    
 - 3.0.3 -- 2020-09-08
 
     - update recommended permissions document

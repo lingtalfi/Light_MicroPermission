@@ -4,7 +4,7 @@
 
 The TestLightMicroPermissionService class
 ================
-2019-09-26 --> 2020-09-08
+2019-09-26 --> 2020-09-15
 
 
 
@@ -36,6 +36,7 @@ class <span class="pl-k">TestLightMicroPermissionService</span> extends [LightMi
     - public [LightMicroPermissionService::setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/setContainer.md)([Ling\Light\ServiceContainer\LightServiceContainerInterface](https://github.com/lingtalfi/Light/blob/master/doc/api/Ling/Light/ServiceContainer/LightServiceContainerInterface.md) $container) : void
     - public [LightMicroPermissionService::registerMicroPermissionsByFile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/registerMicroPermissionsByFile.md)(string $file) : void
     - public [LightMicroPermissionService::registerMicroPermissionsByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/registerMicroPermissionsByProfile.md)(string $file) : void
+    - public [LightMicroPermissionService::checkMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/checkMicroPermission.md)(string $microPermission) : void
     - public [LightMicroPermissionService::hasMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/hasMicroPermission.md)(string $microPermission) : bool
 
 }
@@ -53,6 +54,7 @@ Methods
 - [LightMicroPermissionService::setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/setContainer.md) &ndash; Sets the container.
 - [LightMicroPermissionService::registerMicroPermissionsByFile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/registerMicroPermissionsByFile.md) &ndash; Register the micro-permission bindings defined in the given file.
 - [LightMicroPermissionService::registerMicroPermissionsByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/registerMicroPermissionsByProfile.md) &ndash; Registers the micro-permissions profile.
+- [LightMicroPermissionService::checkMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/checkMicroPermission.md) &ndash; Checks that the user has the given micro-permission, and throws an exception if that's not the case.
 - [LightMicroPermissionService::hasMicroPermission](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/hasMicroPermission.md) &ndash; Returns whether the current user has the given micro-permission.
 
 
