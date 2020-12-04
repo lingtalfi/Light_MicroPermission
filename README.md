@@ -70,6 +70,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.5 -- 2020-12-04
+
+    - Add lpi-deps.byml file
+
 - 3.0.4 -- 2020-09-15
 
     - add service.checkMicroPermission method
