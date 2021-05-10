@@ -75,6 +75,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.9 -- 2021-05-10
+
+    - Fix assets missing.
+
 - 3.0.8 -- 2021-03-15
 
     - update planet to adapt Ling.Light:0.70.0
