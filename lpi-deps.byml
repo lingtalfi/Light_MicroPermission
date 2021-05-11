@@ -135,3 +135,9 @@
     - Ling:Light:0.70.4+
     - Ling:Light_User:1.7.3+
     - Ling:Light_UserManager:1.5.7+
+
+3.0.10: 
+    - Ling:BabyYaml:1.7.8+
+    - Ling:Light:0.70.4+
+    - Ling:Light_User:1.7.3+
+    - Ling:Light_UserManager:1.5.8+

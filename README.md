@@ -75,6 +75,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.10 -- 2021-05-11
+
+    - Update deps (by CommitWizard).
+
 - 3.0.9 -- 2021-05-10
 
     - Fix assets missing.
