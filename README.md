@@ -75,6 +75,10 @@ micro_permission:
 History Log
 =============
 
+- 3.0.11 -- 2021-05-31
+
+    - Removing trailing plus in lpi-deps file (to work with Light_PlanetInstaller:2.0.0 api
+
 - 3.0.10 -- 2021-05-11
 
     - Update deps (by CommitWizard).
