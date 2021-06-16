@@ -5,6 +5,7 @@ namespace Ling\Light_MicroPermission\Service;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\BDotTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_MicroPermission\Exception\LightMicroPermissionException;
 use Ling\Light_User\LightUserInterface;
@@ -23,12 +24,12 @@ class LightMicroPermissionService
     protected $container;
 
     /**
-     * This property holds the microPermissionsMap for this instance.
+     * This property holds the map for this instance.
      * It's an array of micro-permission => (array of) permissions.
      *
      * @var array
      */
-    protected $microPermissionsMap;
+    protected $map;
 
 
     /**
@@ -37,7 +38,7 @@ class LightMicroPermissionService
     public function __construct()
     {
         $this->container = null;
-        $this->microPermissionsMap = [];
+        $this->map = [];
     }
 
     /**
@@ -52,6 +53,81 @@ class LightMicroPermissionService
 
 
     /**
+     *
+     * Registers the micro-permissions profile using our open system.
+     *
+     * See more details in the @page(micro-permission conception notes).
+     *
+     * @param string $file
+     * @throws \Exception
+     */
+    public function registerMicroPermissionsToOpenSystemByProfile(string $file)
+    {
+
+
+        $rootDir = $this->container->getApplicationDir() . "/config/open/Ling.Light_MicroPermission";
+        $toCreate = [];
+
+        if (true === file_exists($file)) {
+
+            $profile = BabyYamlUtil::readFile($file);
+            foreach ($profile as $permission => $microPerms) {
+                foreach ($microPerms as $mp) {
+
+
+                    $p = explode(".", $mp);
+                    $firstComponent = array_shift($p);
+                    $dstFile = $rootDir . "/$firstComponent.byml";
+
+                    $arr = array_key_exists($dstFile, $toCreate) ? $toCreate[$dstFile] : [];
+
+
+                    if (true === empty($p)) {
+                        $arr["*"] = [$permission];
+                    } else {
+                        $path = "";
+                        while (false === empty($p)) {
+                            $nextComponent = array_shift($p);
+                            if ('' !== $path) {
+                                $path .= ".";
+                            }
+                            $path .= $nextComponent;
+
+                            $val = BDotTool::getDotValue($path . ".*", $arr, []);
+                            $val[] = $permission;
+                            $val = array_unique($val);
+                            BDotTool::setDotValue($path . ".*", $val, $arr);
+
+
+                        }
+                    }
+
+
+                    $toCreate[$dstFile] = $arr;
+
+
+                }
+            }
+
+
+            if ($toCreate) {
+                foreach ($toCreate as $dstFile => $arr) {
+                    if (true === file_exists($dstFile)) {
+                        $_arr = BabyYamlUtil::readFile($dstFile);
+                        $arr = array_replace_recursive($_arr, $arr);
+                    }
+                    BabyYamlUtil::writeFile($arr, $dstFile);
+                }
+            }
+
+
+        } else {
+            throw new LightMicroPermissionException("LightMicroPermissionService: file not found: $file.");
+        }
+    }
+
+
+    /**
      * Register the micro-permission bindings defined in the given file.
      * See more details in the @page(micro-permission conception notes).
      *
@@ -59,7 +135,7 @@ class LightMicroPermissionService
      */
     public function registerMicroPermissionsByFile(string $file)
     {
-        $this->microPermissionsMap = array_merge_recursive($this->microPermissionsMap, BabyYamlUtil::readFile($file));
+        $this->map = array_merge_recursive($this->map, BabyYamlUtil::readFile($file));
     }
 
 
@@ -75,12 +151,12 @@ class LightMicroPermissionService
         $profile = BabyYamlUtil::readFile($file);
         foreach ($profile as $permission => $microPerms) {
             foreach ($microPerms as $mp) {
-                if (false === array_key_exists($mp, $this->microPermissionsMap)) {
-                    $this->microPermissionsMap[$mp] = [];
-                } elseif (false === is_array($this->microPermissionsMap[$mp])) {
-                    $this->microPermissionsMap[$mp] = [$this->microPermissionsMap[$mp]];
+                if (false === array_key_exists($mp, $this->map)) {
+                    $this->map[$mp] = [];
+                } elseif (false === is_array($this->map[$mp])) {
+                    $this->map[$mp] = [$this->map[$mp]];
                 }
-                $this->microPermissionsMap[$mp][] = $permission;
+                $this->map[$mp][] = $permission;
             }
         }
     }
@@ -121,28 +197,68 @@ class LightMicroPermissionService
         }
 
 
+        //--------------------------------------------
+        // MAP SYSTEM
+        //--------------------------------------------
         $permissions = [];
-        if (array_key_exists($microPermission, $this->microPermissionsMap)) {
-            $permissions = $this->microPermissionsMap[$microPermission];
-        } else {
+        if (false === empty($this->map)) {
+            if (array_key_exists($microPermission, $this->map)) {
+                $permissions = $this->map[$microPermission];
+            } else {
+                $p = explode(".", $microPermission);
+                $perm = '';
+                $c = false;
+                while (true) {
+                    if (true === $c) {
+                        $perm .= '.';
+                    }
+                    $perm .= array_shift($p);
+                    if (array_key_exists($perm, $this->map)) {
+                        $permissions = $this->map[$perm];
+                        break;
+                    }
+
+
+                    if (empty($p)) {
+                        break;
+                    }
+                    $c = true;
+                }
+            }
+        }
+
+
+        //--------------------------------------------
+        // OPEN SYSTEM
+        //--------------------------------------------
+        if (true === empty($permissions)) {
             $p = explode(".", $microPermission);
-            $perm = '';
-            $c = false;
-            while (true) {
-                if (true === $c) {
-                    $perm .= '.';
-                }
-                $perm .= array_shift($p);
-                if (array_key_exists($perm, $this->microPermissionsMap)) {
-                    $permissions = $this->microPermissionsMap[$perm];
-                    break;
+            $firstComponent = array_shift($p);
+            $openFile = $this->container->getApplicationDir() . "/config/open/Ling.Light_MicroPermission/$firstComponent.byml";
+            if (true === file_exists($openFile)) {
+                $arr = BabyYamlUtil::readFile($openFile);
+                $grantedPermissions = $arr["*"] ?? [];
+                foreach ($grantedPermissions as $permission) {
+                    if (true === $user->hasRight($permission)) {
+                        return true;
+                    }
                 }
 
-
-                if (empty($p)) {
-                    break;
-                }
-                $c = true;
+                do {
+                    if (empty($p)) {
+                        break;
+                    }
+                    $nextComponent = array_shift($p);
+                    if (true === array_key_exists($nextComponent, $arr)) {
+                        $arr = $arr[$nextComponent];
+                        $grantedPermissions = $arr["*"] ?? [];
+                        foreach ($grantedPermissions as $permission) {
+                            if (true === $user->hasRight($permission)) {
+                                return true;
+                            }
+                        }
+                    }
+                } while (true);
             }
         }
 
