@@ -5,6 +5,7 @@ namespace Ling\Light_MicroPermission\Service;
 
 
 use Ling\BabyYaml\BabyYamlUtil;
+use Ling\Bat\ArrayTool;
 use Ling\Bat\BDotTool;
 use Ling\Light\ServiceContainer\LightServiceContainerInterface;
 use Ling\Light_MicroPermission\Exception\LightMicroPermissionException;
@@ -121,6 +122,87 @@ class LightMicroPermissionService
             }
 
 
+        } else {
+            throw new LightMicroPermissionException("LightMicroPermissionService: file not found: $file.");
+        }
+    }
+
+
+    /**
+     *
+     * Unregisters the micro-permissions profile from our open system.
+     *
+     * See more details in the @page(micro-permission conception notes).
+     *
+     * @param string $file
+     * @throws \Exception
+     */
+    public function unregisterMicroPermissionsToOpenSystemByProfile(string $file)
+    {
+
+
+        $rootDir = $this->container->getApplicationDir() . "/config/open/Ling.Light_MicroPermission";
+
+
+        if (true === file_exists($file)) {
+
+
+            $profile = BabyYamlUtil::readFile($file);
+            foreach ($profile as $permission => $microPerms) {
+                foreach ($microPerms as $mp) {
+                    $p = explode(".", $mp);
+                    $firstComponent = array_shift($p);
+                    $dstFile = $rootDir . "/$firstComponent.byml";
+                    $arr = BabyYamlUtil::readFile($dstFile);
+                    $hasChanged = false;
+
+
+                    if (true === empty($p)) {
+                        $arr = ArrayTool::filterRecursive($arr, function ($v) use ($permission, &$hasChanged) {
+                            if ($permission === $v) {
+                                $hasChanged = true;
+                                return false;
+                            }
+                            return true;
+                        });
+                    } else {
+
+                        $path = "";
+                        while (false === empty($p)) {
+                            $nextComponent = array_shift($p);
+                            if ('' !== $path) {
+                                $path .= ".";
+                            }
+                            $path .= $nextComponent;
+                        }
+
+
+                        $val = BDotTool::getDotValue($path, $arr, []);
+                        $val = ArrayTool::filterRecursive($val, function ($v) use ($permission, &$hasChanged) {
+                            if ($permission === $v) {
+                                $hasChanged = true;
+                                return false;
+                            }
+                            return true;
+                        });
+
+
+                        // resetting indexes
+                        if(true === is_array($val) && true === array_key_exists("*", $val)){
+                            $val['*'] = array_merge($val['*']);
+                        }
+                        BDotTool::setDotValue($path, $val, $arr);
+                    }
+
+
+                    if (true === $hasChanged) {
+
+                        $this->cleanUpAsterisks($arr);
+                        $this->cleanUpEmptyArrays($arr, $arr);
+                        BabyYamlUtil::writeFile($arr, $dstFile);
+                    }
+                }
+            }
         } else {
             throw new LightMicroPermissionException("LightMicroPermissionService: file not found: $file.");
         }
@@ -277,5 +359,76 @@ class LightMicroPermissionService
             }
         }
         return false;
+    }
+
+
+
+
+    //--------------------------------------------
+    //
+    //--------------------------------------------
+
+    /**
+     * Cleans up asterisks recursively in the given array.
+     * @param array $arr
+     */
+    private function cleanUpAsterisks(array &$arr)
+    {
+        foreach ($arr as $k => &$v) {
+            if ('*' === $k && true === empty($arr[$k])) {
+                unset($arr[$k]);
+            } else {
+                if (true === is_array($v)) {
+                    $this->cleanUpAsterisks($v);
+                }
+            }
+        }
+    }
+
+    /**
+     * Cleans up empty arrays recursively in the given array.
+     * @param array $arr
+     * @param array $testedArray
+     * @param string $path
+     */
+    private function cleanUpEmptyArrays(array &$arr, array $testedArray = [], string $path = "")
+    {
+        foreach ($testedArray as $k => &$v) {
+            if (true === is_array($v)) {
+                if ('' !== $path) {
+                    $path .= ".";
+                }
+                $path .= $k;
+
+                if (true === empty($v)) {
+                    BDotTool::unsetDotValue($path, $arr);
+
+
+                    do {
+
+                        $p = BDotTool::getPathComponents($path);
+                        array_pop($p);
+                        $path = implode(".", $p);
+                        $val = BDotTool::getDotValue($path, $arr);
+                        if (true === empty($val)) {
+                            BDotTool::unsetDotValue($path, $arr);
+                        }
+                    } while (false === empty($p));
+
+
+                } else {
+
+
+                    $this->cleanUpEmptyArrays($arr, $v, $path);
+                }
+
+
+                $p = explode(".", $path);
+                array_pop($p);
+                $path = implode(".", $p);
+
+
+            }
+        }
     }
 }

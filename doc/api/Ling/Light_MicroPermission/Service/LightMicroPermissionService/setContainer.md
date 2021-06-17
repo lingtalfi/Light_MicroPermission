@@ -49,7 +49,7 @@ Returns void.
 
 Source Code
 ===========
-See the source code for method [LightMicroPermissionService::setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/Service/LightMicroPermissionService.php#L49-L52)
+See the source code for method [LightMicroPermissionService::setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/Service/LightMicroPermissionService.php#L50-L53)
 
 
 See Also

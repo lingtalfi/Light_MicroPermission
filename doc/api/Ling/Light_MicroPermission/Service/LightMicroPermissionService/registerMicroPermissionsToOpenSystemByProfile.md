@@ -56,7 +56,7 @@ Exceptions thrown
 
 Source Code
 ===========
-See the source code for method [LightMicroPermissionService::registerMicroPermissionsToOpenSystemByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/Service/LightMicroPermissionService.php#L64-L127)
+See the source code for method [LightMicroPermissionService::registerMicroPermissionsToOpenSystemByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/Service/LightMicroPermissionService.php#L65-L128)
 
 
 See Also
@@ -64,5 +64,5 @@ See Also
 
 The [LightMicroPermissionService](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService.md) class.
 
-Previous method: [setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/setContainer.md)<br>Next method: [registerMicroPermissionsByFile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/registerMicroPermissionsByFile.md)<br>
+Previous method: [setContainer](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/setContainer.md)<br>Next method: [unregisterMicroPermissionsToOpenSystemByProfile](https://github.com/lingtalfi/Light_MicroPermission/blob/master/doc/api/Ling/Light_MicroPermission/Service/LightMicroPermissionService/unregisterMicroPermissionsToOpenSystemByProfile.md)<br>
 
